@@ -1,0 +1,4 @@
+columns:
+  - name: author
+    xpath: author/text()
+    type: string
