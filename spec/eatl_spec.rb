@@ -9,7 +9,7 @@ describe Eatl do
   end
 
   it "applies a schema to an XML document" do
-    book = Eatl::SchemaParser.new(schema).apply_to(document).first
+    book = Eatl::Document.new(schema).parse(document).first
     expect(book.author).to eq('greggroth')
     expect(book.pages).to eq(120)
     expect(book.published_at).to eq(DateTime.new(2016, 11, 12, 8))
@@ -20,7 +20,7 @@ describe Eatl do
     let(:schema) { './spec/fixtures/schema/chapters.yaml' }
 
     it "returns a collection of objects" do
-      chapters = Eatl::SchemaParser.new(schema).apply_to(document)
+      chapters = Eatl::Document.new(schema).parse(document)
       expect(chapters.count).to eq(2)
       expect(chapters[0].title).to eq('Ch 1')
       expect(chapters[1].title).to eq('Ch 2')
@@ -32,7 +32,7 @@ describe Eatl do
     let(:schema) { './spec/fixtures/schema/namespace_library.yaml' }
 
     it "returns a collection of objects" do
-      books = Eatl::SchemaParser.new(schema).apply_to(document)
+      books = Eatl::Document.new(schema).parse(document)
       expect(books.count).to eq(2)
       expect(books[0].title).to eq('Handy Book 1')
       expect(books[1].title).to eq('Handy Book 2')

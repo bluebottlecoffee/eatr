@@ -1,6 +1,6 @@
 require "eatl/version"
 require "eatl/schema"
-require "eatl/schema_parser"
+require "eatl/document"
 
 module Eatl
 end

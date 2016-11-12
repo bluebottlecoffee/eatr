@@ -2,12 +2,12 @@ require "yaml"
 require "nokogiri"
 
 module Eatl
-  class SchemaParser
+  class Document
     def initialize(schema_path)
       @schema = Schema.new(YAML.load(File.read(schema_path)))
     end
 
-    def apply_to(xml_document_path)
+    def parse(xml_document_path)
       @namespaces = {}
 
       doc = Nokogiri::XML(File.open(xml_document_path)) do |config|
