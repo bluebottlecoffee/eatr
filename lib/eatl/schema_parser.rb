@@ -13,8 +13,8 @@ module Eatl
       end
 
       cardinality = @schema.input_fields.inject(1) do |memo, field|
-        if field.has_key?('node')
-          memo * doc.xpath(field.fetch('xpath')).count
+        if field.node?
+          memo * doc.xpath(field.xpath).count
         else
           memo
         end
@@ -40,15 +40,15 @@ module Eatl
     private
 
     def set_field(objects, doc, field)
-      if field.has_key?('name')
-        objects.each do |o|
-          o.public_send("#{field['name']}=", value_at(doc, field))
-        end
-      elsif field.has_key?('node')
-        doc.xpath(field.fetch('xpath')).each_with_index do |child_xml, idx|
-          field.fetch('children').flat_map do |child|
+      if field.node?
+        doc.xpath(field.xpath).each_with_index do |child_xml, idx|
+          field.children.flat_map do |child|
             set_field([objects[idx]], child_xml, child)
           end
+        end
+      elsif field.name
+        objects.each do |o|
+          o.public_send("#{field.name}=", value_at(doc, field))
         end
       end
 
@@ -56,9 +56,9 @@ module Eatl
     end
 
     def value_at(doc, field)
-      text = doc.at_xpath(field.fetch('xpath')).content
+      text = doc.at_xpath(field.xpath).content
 
-      case field['type'].to_s.downcase
+      case field.type
       when 'integer' then text.to_i
       else
         text
