@@ -3,6 +3,6 @@ input_fields:
   - node: books
     xpath: //big:Library/big:Books/book
     children:
-    - name: name
-      xpath: ./name
+    - name: title
+      xpath: ./title
       type: string

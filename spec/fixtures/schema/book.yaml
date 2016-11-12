@@ -6,3 +6,6 @@ input_fields:
   - name: pages
     xpath: //pages
     type: integer
+  - name: published_at
+    xpath: //publishedAt
+    type: timestamp

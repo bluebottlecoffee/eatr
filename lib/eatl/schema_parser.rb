@@ -30,11 +30,7 @@ module Eatl
         objects = set_field(objects, doc, field)
       end
 
-      if objects.count == 1
-        objects.first
-      else
-        objects
-      end
+      objects
     end
 
     private
@@ -56,12 +52,17 @@ module Eatl
     end
 
     def value_at(doc, field)
-      text = doc.at_xpath(field.xpath).content
+      if node = doc.at_xpath(field.xpath)
+        text = node.content
 
-      case field.type
-      when 'integer' then text.to_i
+        case field.type
+        when 'integer' then text.to_i
+        when 'timestamp' then DateTime.parse(text)
+        else
+          text
+        end
       else
-        text
+        ""
       end
     end
   end
