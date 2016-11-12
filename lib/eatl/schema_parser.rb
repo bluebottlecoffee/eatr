@@ -6,8 +6,8 @@ module Eatl
     attr_reader :destination_struct
 
     def initialize(schema_path)
-      @schema = YAML.load(File.read(schema_path))
-      @destination_struct = Struct.new(constantize(@schema.fetch('name', 'schema')), *field_names(@schema))
+      @schema = Schema.new(YAML.load(File.read(schema_path)))
+      @destination_struct = Struct.new(constantize(@schema.name), *field_names(@schema))
     end
 
     def apply_to(xml_document_path)
@@ -15,7 +15,7 @@ module Eatl
         config.strict.nonet
       end
 
-      cardinality = @schema.fetch('input_fields').inject(1) do |memo, field|
+      cardinality = @schema.input_fields.inject(1) do |memo, field|
         if field.has_key?('node')
           memo * doc.xpath(field.fetch('xpath')).count
         else
@@ -29,7 +29,7 @@ module Eatl
         objects << destination_struct.new
       end
 
-      @schema.fetch('input_fields').each do |field|
+      @schema.input_fields.each do |field|
         objects = set_field(objects, doc, field)
       end
 
@@ -59,8 +59,8 @@ module Eatl
     end
 
     def field_names(schema)
-      schema.fetch('input_fields').select { |f| f['name'] }.
-        concat(schema.fetch('input_fields').flat_map { |f| f['children'] }.compact).
+      schema.input_fields.select { |f| f['name'] }.
+        concat(schema.input_fields.flat_map { |f| f['children'] }.compact).
         map { |f| f.fetch('name').to_sym }
     end
 
