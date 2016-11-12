@@ -9,11 +9,12 @@ describe Eatl do
   end
 
   it "applies a schema to an XML document" do
-    book = Eatl::Document.new(schema).parse(document).first
-    expect(book.author).to eq('greggroth')
-    expect(book.pages).to eq(120)
-    expect(book.published_at).to eq(DateTime.new(2016, 11, 12, 8))
-    expect(book.rating).to eq(8.9)
+    books = Eatl::Document.new(schema).parse(document)
+    expect(books.count).to eq(1)
+    expect(books.first.author).to eq('greggroth')
+    expect(books.first.pages).to eq(120)
+    expect(books.first.published_at).to eq(DateTime.new(2016, 11, 12, 8))
+    expect(books.first.rating).to eq(8.9)
   end
 
   describe "parsing one document to multiple objects" do
