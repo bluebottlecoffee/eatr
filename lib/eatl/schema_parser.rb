@@ -7,7 +7,7 @@ module Eatl
 
     def initialize(schema_path)
       @schema = Schema.new(YAML.load(File.read(schema_path)))
-      @destination_struct = Struct.new(constantize(@schema.name), *field_names(@schema))
+      @destination_struct = Struct.new(@schema.constant_name, *@schema.field_names)
     end
 
     def apply_to(xml_document_path)
@@ -56,16 +56,6 @@ module Eatl
       end
 
       objects
-    end
-
-    def field_names(schema)
-      schema.input_fields.select { |f| f['name'] }.
-        concat(schema.input_fields.flat_map { |f| f['children'] }.compact).
-        map { |f| f.fetch('name').to_sym }
-    end
-
-    def constantize(underscore_name)
-      underscore_name.split('_').map(&:capitalize).join
     end
 
     def value_at(doc, field)

@@ -11,5 +11,22 @@ module Eatl
     def name
       @schema.fetch('name', 'schema')
     end
+
+    def constant_name
+      constantize(name)
+    end
+
+    def field_names
+      input_fields.select { |f| f['name'] }.
+        concat(input_fields.flat_map { |f| f['children'] }.compact).
+        map { |f| f.fetch('name').to_sym }
+    end
+
+    private
+
+    def constantize(underscore_name)
+      underscore_name.split('_').map(&:capitalize).join
+    end
+
   end
 end
