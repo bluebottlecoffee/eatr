@@ -17,8 +17,9 @@ module Eatl
       end
 
       obj = destination_struct.new
+
       @schema.fetch('input_fields').each do |field|
-        obj.public_send("#{field['name']}=", doc.at_xpath(field.fetch('xpath')).content)
+        obj.public_send("#{field['name']}=", value_at(doc, field))
       end
 
       obj
@@ -28,6 +29,16 @@ module Eatl
 
     def constantize(underscore_name)
       underscore_name.split('_').map(&:capitalize).join
+    end
+
+    def value_at(doc, field)
+      text = doc.at_xpath(field.fetch('xpath')).content
+
+      case field['type'].downcase
+      when 'integer' then text.to_i
+      else
+        text
+      end
     end
   end
 end

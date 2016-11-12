@@ -3,3 +3,6 @@ input_fields:
   - name: author
     xpath: //author/firstName
     type: string
+  - name: pages
+    xpath: //pages
+    type: integer

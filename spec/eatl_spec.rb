@@ -11,5 +11,6 @@ describe Eatl do
 
     book = Eatl::SchemaParser.new(schema).apply_to(document)
     expect(book.author).to eq('greggroth')
+    expect(book.pages).to eq(120)
   end
 end
