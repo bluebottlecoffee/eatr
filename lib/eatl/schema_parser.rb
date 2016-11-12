@@ -57,6 +57,7 @@ module Eatl
 
         case field.type
         when 'integer' then text.to_i
+        when 'float' then text.to_f
         when 'timestamp' then DateTime.parse(text)
         else
           text

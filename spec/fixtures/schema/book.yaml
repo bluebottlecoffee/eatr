@@ -9,3 +9,6 @@ input_fields:
   - name: published_at
     xpath: //publishedAt
     type: timestamp
+  - name: rating
+    xpath: //rating
+    type: float
