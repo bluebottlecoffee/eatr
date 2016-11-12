@@ -1,0 +1,11 @@
+name: chapters
+input_fields:
+  - name: author
+    xpath: //author/firstName
+    type: string
+  - node: chapters
+    xpath: //chapters/chapter
+    children:
+    - name: title
+      xpath: ./title
+      type: string

@@ -3,4 +3,12 @@
     <firstName>greggroth</firstName>
   </author>
   <pages>120</pages>
+  <chapters>
+    <chapter>
+      <title>Ch 1</title>
+    </chapter>
+    <chapter>
+      <title>Ch 2</title>
+    </chapter>
+  </chapters>
 </book>
