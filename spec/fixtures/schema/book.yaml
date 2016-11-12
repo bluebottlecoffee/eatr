@@ -1,4 +1,5 @@
-columns:
+name: book
+input_fields:
   - name: author
-    xpath: author/text()
+    xpath: //author/firstName
     type: string
