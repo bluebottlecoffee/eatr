@@ -25,4 +25,16 @@ describe Eatl do
       expect(chapters[1].title).to eq('Ch 2')
     end
   end
+
+  describe "parsing document with namespaces" do
+    let(:document) { './spec/fixtures/xml/namespace_library.xml' }
+    let(:schema) { './spec/fixtures/schema/namespace_library.yaml' }
+
+    it "returns a collection of objects" do
+      books = Eatl::SchemaParser.new(schema).apply_to(document)
+      expect(books.count).to eq(2)
+      expect(books[0].title).to eq('Handy Book 1')
+      expect(books[1].title).to eq('Handy Book 2')
+    end
+  end
 end

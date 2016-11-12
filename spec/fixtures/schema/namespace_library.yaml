@@ -1,0 +1,8 @@
+name: library
+input_fields:
+  - node: books
+    xpath: //big:Library/big:Books/book
+    children:
+    - name: name
+      xpath: ./name
+      type: string
