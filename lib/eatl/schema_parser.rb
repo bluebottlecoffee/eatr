@@ -8,13 +8,17 @@ module Eatl
     end
 
     def apply_to(xml_document_path)
+      @namespaces = {}
+
       doc = Nokogiri::XML(File.open(xml_document_path)) do |config|
         config.strict.nonet
       end
 
+      @namespaces = doc.collect_namespaces
+
       cardinality = @schema.input_fields.inject(1) do |memo, field|
         if field.node?
-          memo * doc.xpath(field.xpath).count
+          memo * doc.xpath(field.xpath, @namespaces).count
         else
           memo
         end
@@ -37,7 +41,7 @@ module Eatl
 
     def set_field(objects, doc, field)
       if field.node?
-        doc.xpath(field.xpath).each_with_index do |child_xml, idx|
+        doc.xpath(field.xpath, @namespaces).each_with_index do |child_xml, idx|
           field.children.flat_map do |child|
             set_field([objects[idx]], child_xml, child)
           end
@@ -52,7 +56,7 @@ module Eatl
     end
 
     def value_at(doc, field)
-      if node = doc.at_xpath(field.xpath)
+      if node = doc.at_xpath(field.xpath, @namespaces)
         text = node.content
 
         case field.type

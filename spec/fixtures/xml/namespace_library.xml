@@ -1,4 +1,4 @@
-<big:Library xmlns:big="urn:example.com">
+<Library xmlns:big="urn:example.com">
   <big:Books>
     <book>
       <title>Handy Book 1</title>
@@ -7,4 +7,4 @@
       <title>Handy Book 2</title>
     </book>
   </big:Books>
-</big:Library>
+</Library>
