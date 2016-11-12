@@ -39,7 +39,11 @@ module Eatl
     end
 
     def to_struct
-      Struct.new(constant_name, *field_names)
+      @struct_klass ||= begin
+                          Object.const_get(constant_name)
+                        rescue NameError
+                          Struct.new(constant_name, *field_names)
+                        end
     end
 
     private
