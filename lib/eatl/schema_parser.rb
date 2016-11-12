@@ -3,11 +3,8 @@ require "nokogiri"
 
 module Eatl
   class SchemaParser
-    attr_reader :destination_struct
-
     def initialize(schema_path)
       @schema = Schema.new(YAML.load(File.read(schema_path)))
-      @destination_struct = Struct.new(@schema.constant_name, *@schema.field_names)
     end
 
     def apply_to(xml_document_path)
@@ -26,7 +23,7 @@ module Eatl
       objects = []
 
       cardinality.times do |n|
-        objects << destination_struct.new
+        objects << @schema.to_struct.new
       end
 
       @schema.input_fields.each do |field|
