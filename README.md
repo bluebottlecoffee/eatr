@@ -23,7 +23,44 @@ Or install it yourself as:
 ## Usage
 
 
-Here is an example from the test suite of using a schema defintion to parse an XML document:
+The library supports creating a collection of struct of arbirary cardinality.  For example, if you're interested in capturing all the chapters from an XML representation of a book, but also want to capture higher-level keys such as the author:
+
+```xml
+<book>
+  <author>
+    <firstName>greggroth</firstName>
+  </author>
+  <publishedAt>2016-11-12T8:00:00Z</publishedAt>
+  <rating>8.9</rating>
+  <pages>120</pages>
+  <chapters>
+    <chapter>
+      <title>Ch 1</title>
+    </chapter>
+    <chapter>
+      <title>Ch 2</title>
+    </chapter>
+  </chapters>
+</book>
+```
+
+You can use a schema definition like:
+
+```yaml
+name: chapters
+input_fields:
+  - name: author
+    xpath: //author/firstName
+    type: string
+  - node: chapters
+    xpath: //chapters/chapter
+    children:
+    - name: title
+      xpath: ./title
+      type: string
+```
+
+Here is an example from the test suite of using this XML and schema defintion:
 
 ```ruby
 > chapters = Eatl::Document.new('./spec/fixtures/schema/book.yaml' ).parse('./spec/fixtures/xml/book.xml' )
