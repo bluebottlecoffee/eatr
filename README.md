@@ -22,7 +22,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+
+Here is an example from the test suite of using a schema defintion to parse an XML document:
+
+```ruby
+> chapters = Eatl::Document.new('./spec/fixtures/schema/book.yaml' ).parse('./spec/fixtures/xml/book.xml' )
+=> [#<struct Struct::Chapters author="greggroth", title="Ch 1">,
+ #<struct Struct::Chapters author="greggroth", title="Ch 2">]
+```
 
 ## Development
 
