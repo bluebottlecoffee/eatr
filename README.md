@@ -1,8 +1,7 @@
 # Eatl
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/eatl`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Configuration-based XML parsing library.  Define structs in YAML configuration
+files and parse XML documents to create and populate the structs.
 
 ## Installation
 
@@ -23,7 +22,10 @@ Or install it yourself as:
 ## Usage
 
 
-The library supports creating a collection of struct of arbirary cardinality.  For example, if you're interested in capturing all the chapters from an XML representation of a book, but also want to capture higher-level keys such as the author:
+The library supports creating a collection of struct of arbirary cardinality.
+For example, if you're interested in capturing all the chapters from an XML
+representation of a book, but also want to capture higher-level keys such as
+the author:
 
 ```xml
 <book>
@@ -76,7 +78,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/eatl. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/bluebottlecoffee/eatl. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
