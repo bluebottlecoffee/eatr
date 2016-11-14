@@ -14,7 +14,12 @@ module Eatl
         config.strict.nonet
       end
 
-      @namespaces = doc.collect_namespaces
+      if @schema.remove_namespaces?
+        doc.remove_namespaces!
+        @namespaces = {}
+      else
+        @namespaces = doc.collect_namespaces
+      end
 
       cardinality = @schema.input_fields.inject(1) do |memo, field|
         if field.node?

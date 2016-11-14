@@ -39,4 +39,16 @@ describe Eatl do
       expect(books[1].title).to eq('Handy Book 2')
     end
   end
+
+  describe '"remove_namespaces" option' do
+    let(:document) { './spec/fixtures/xml/namespace_library.xml' }
+    let(:schema) { './spec/fixtures/schema/library.yaml' }
+
+    it "allows navigating the document without namespaces" do
+      books = Eatl::Document.new(schema).parse(document)
+      expect(books.count).to eq(2)
+      expect(books[0].title).to eq('Handy Book 1')
+      expect(books[1].title).to eq('Handy Book 2')
+    end
+  end
 end

@@ -1,0 +1,10 @@
+name: library
+remove_namespaces: true
+input_fields:
+  - node: books
+    xpath: //Library/Books/book
+    children:
+    - name: title
+      xpath: ./title
+      type: string
+
