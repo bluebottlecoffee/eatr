@@ -70,6 +70,34 @@ Here is an example from the test suite of using this XML and schema defintion:
  #<struct Struct::Chapters author="greggroth", title="Ch 2">]
 ```
 
+## Fields
+
+
+Typical `input_field`:
+
+- `name`
+  - required
+  - Name of the field to be used as the `attr_accessor` in the destination struct.
+- `xpath`
+  - required
+  - Path to the object in the XML document that should be used to populate this field
+- `type`
+  - optional -- defaults to `string`
+  - Can be `string`, `integer`, `float` or `timestamp`
+
+Node fields:
+
+- `node`
+  - optional
+  - Name to describe this collection of nodes
+- `xpath`
+  - required
+  - Indicates the collection of children documents to be passed to the `chilren` field definitions
+- `children`:
+  - required
+  - Collection of normal field definitions, except their `xpath` is relative to the child document defined per the `xpath` of the parent node.
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
