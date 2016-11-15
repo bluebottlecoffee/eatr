@@ -14,4 +14,3 @@ input_fields:
     type: float
   - name: icbn
     xpath: //icbn
-    required: false

@@ -71,6 +71,8 @@ module Eatl
         else
           text
         end
+      elsif field.required?
+        raise NodeNotFound, "Unable to find node at '#{field.xpath}'"
       else
         ""
       end

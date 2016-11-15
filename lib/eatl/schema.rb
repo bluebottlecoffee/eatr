@@ -21,6 +21,10 @@ module Eatl
         @field_attributes.has_key?('node')
       end
 
+      def required?
+        @field_attributes.fetch('required', true)
+      end
+
       def children
         Array[*@field_attributes['children']].map { |f| Field.new(f) }
       end

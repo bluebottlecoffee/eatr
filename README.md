@@ -73,7 +73,7 @@ Here is an example from the test suite of using this XML and schema defintion:
 ## Fields
 
 
-Typical `input_field`:
+`input_field` attributes:
 
 - `name`
   - required
@@ -84,8 +84,11 @@ Typical `input_field`:
 - `type`
   - optional -- defaults to `string`
   - Can be `string`, `integer`, `float` or `timestamp`
+- `required`
+  - optional -- defaults to `true`
+  - If a node cannot be found at the given `xpath`, an `Eatl::NodeNotFound` error is raised.
 
-Node fields:
+Node field attributes:
 
 - `node`
   - optional

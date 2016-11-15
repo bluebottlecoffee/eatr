@@ -51,4 +51,13 @@ describe Eatl do
       expect(books[1].title).to eq('Handy Book 2')
     end
   end
+
+  describe '"field.required" option' do
+    let(:document) { './spec/fixtures/xml/book.xml' }
+    let(:schema) { './spec/fixtures/schema/book_icbn.yaml' }
+
+    it "raises an error if a field cannot be located" do
+      expect { Eatl::Document.new(schema).parse(document) }.to raise_error(Eatl::NodeNotFound, "Unable to find node at '//icbn'")
+    end
+  end
 end
