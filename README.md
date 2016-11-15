@@ -83,7 +83,7 @@ Here is an example from the test suite of using this XML and schema defintion:
   - Path to the object in the XML document that should be used to populate this field
 - `type`
   - optional -- defaults to `string`
-  - Can be `string`, `integer`, `float` or `timestamp`
+  - Can be `boolean`, `float`, `integer`, `string` or `timestamp`
 - `required`
   - optional -- defaults to `true`
   - If a node cannot be found at the given `xpath`, an `Eatl::NodeNotFound` error is raised.

@@ -6,6 +6,9 @@ input_fields:
   - name: pages
     xpath: //pages
     type: integer
+  - name: for_sale
+    xpath: //forSale
+    type: boolean
   - name: published_at
     xpath: //publishedAt
     type: timestamp

@@ -15,6 +15,7 @@ describe Eatl do
     expect(books.first.pages).to eq(120)
     expect(books.first.published_at).to eq(DateTime.new(2016, 11, 12, 8))
     expect(books.first.rating).to eq(8.9)
+    expect(books.first.for_sale).to eq(false)
   end
 
   describe "parsing one document to multiple objects" do
