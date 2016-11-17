@@ -1,7 +1,8 @@
 # Eatl
 
-Configuration-based XML parsing library.  Define structs in YAML configuration
-files and parse XML documents to create and populate the structs.
+Configuration-based XML and CSV document parsing library.  Define structs in
+YAML configuration files and parse documents to create and populate the
+structs.
 
 ## Installation
 
@@ -20,7 +21,6 @@ Or install it yourself as:
     $ gem install eatl
 
 ## Usage
-
 
 The library supports creating a collection of struct of arbirary cardinality.
 For example, if you're interested in capturing all the chapters from an XML
