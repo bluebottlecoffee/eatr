@@ -70,23 +70,39 @@ Here is an example from the test suite of using this XML and schema defintion:
  #<struct Struct::Chapters author="greggroth", title="Ch 2">]
 ```
 
-## Fields
-
+## Common Fields
 
 `input_field` attributes:
 
 - `name`
   - required
   - Name of the field to be used as the `attr_accessor` in the destination struct.
-- `xpath`
-  - required
-  - Path to the object in the XML document that should be used to populate this field
 - `type`
   - optional -- defaults to `string`
-  - Can be `boolean`, `float`, `integer`, `string` or `timestamp`
+  - Can be
+    - `boolean`
+    - `float`
+    - `integer`
+    - `string`
+    - `timestamp`
 - `required`
   - optional -- defaults to `true`
   - If a node cannot be found at the given `xpath`, an `Eatl::NodeNotFound` error is raised.
+- `strptime`
+  - optional -- only applicable if `type` is set to `timestamp`
+  - Format string used to parse the string into a `DateTime` object
+
+## Fields for `Eatl::Csv::Document` schemas
+
+- `csv_header`
+  - required
+  - Name of header the field is expected to be under
+
+## Fields for `Eatl::Xml::Document` schemas
+
+- `xpath`
+  - required
+  - Path to the object in the XML document that should be used to populate this field
 
 Node field attributes:
 
