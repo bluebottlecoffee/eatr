@@ -65,7 +65,7 @@ input_fields:
 Here is an example from the test suite of using this XML and schema defintion:
 
 ```ruby
-> chapters = Eatl::Document.new('./spec/fixtures/schema/book.yaml' ).parse('./spec/fixtures/xml/book.xml' )
+> chapters = Eatl::Xml::Document.new('./spec/fixtures/schema/book.yaml' ).parse('./spec/fixtures/xml/book.xml' )
 => [#<struct Struct::Chapters author="greggroth", title="Ch 1">,
  #<struct Struct::Chapters author="greggroth", title="Ch 2">]
 ```

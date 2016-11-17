@@ -1,7 +1,6 @@
 require "eatl/version"
 require "eatl/schema"
-require "eatl/document"
+require "eatl/xml/document"
 
 module Eatl
-  NodeNotFound = Class.new(StandardError)
 end
