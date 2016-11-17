@@ -88,6 +88,9 @@ Here is an example from the test suite of using this XML and schema defintion:
 - `required`
   - optional -- defaults to `true`
   - If a node cannot be found at the given `xpath`, an `Eatl::NodeNotFound` error is raised.
+- `value`
+  - optional -- superceeds `xpath` or `csv_header` values
+  - If set, this value will be used as the attribute's value
 - `strptime`
   - optional -- only applicable if `type` is set to `timestamp`
   - Format string used to parse the string into a `DateTime` object

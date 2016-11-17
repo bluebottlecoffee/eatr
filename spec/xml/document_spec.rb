@@ -12,6 +12,7 @@ describe Eatl::Xml::Document do
     expect(books.first.published_at).to eq(DateTime.new(2016, 11, 12, 8))
     expect(books.first.rating).to eq(8.9)
     expect(books.first.for_sale).to eq(false)
+    expect(books.first.age).to eq(12)
   end
 
   describe "parsing one document to multiple objects" do
@@ -54,7 +55,7 @@ describe Eatl::Xml::Document do
     let(:schema) { './spec/fixtures/schema/book_icbn.yaml' }
 
     it "raises an error if a field cannot be located" do
-      expect { Eatl::Xml::Document.new(schema).parse(document) }.to raise_error(Eatl::Xml::NodeNotFound, "Unable to find node at '//icbn'")
+      expect { Eatl::Xml::Document.new(schema).parse(document) }.to raise_error(Eatl::Xml::NodeNotFound, "Unable to find 'icbn' using xpath '//icbn'")
     end
   end
 end

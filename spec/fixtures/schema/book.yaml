@@ -20,3 +20,5 @@ fields:
     required: false
   - name: hardcover
     required: false
+  - name: age
+    value: 12

@@ -33,6 +33,10 @@ module Eatl
         @field_attributes['strptime']
       end
 
+      def value
+        @field_attributes['value']
+      end
+
       def children
         Array[*@field_attributes['children']].map { |f| Field.new(f) }
       end

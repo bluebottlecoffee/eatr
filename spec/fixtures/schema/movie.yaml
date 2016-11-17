@@ -16,3 +16,5 @@ fields:
     strptime: '%m/%d/%Y'
   - name: lead_actor
     required: false
+  - name: is_good
+    value: true

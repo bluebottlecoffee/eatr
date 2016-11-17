@@ -30,10 +30,12 @@ module Eatl
       private
 
       def value_at(row, field)
-        if text = row[field.csv_header]
+        if field.value
+          field.value
+        elsif text = row[field.csv_header]
           parse_value(field, text)
         elsif field.required?
-          raise ValueNotFound, "Unable to find value with header '#{field.csv_header}'"
+          raise ValueNotFound, "Unable to find '#{field.name}' with header '#{field.csv_header}'"
         end
       end
     end

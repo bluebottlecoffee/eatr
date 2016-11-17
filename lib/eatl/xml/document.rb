@@ -66,10 +66,12 @@ module Eatl
       end
 
       def value_at(doc, field)
-        if node = doc.at_xpath(field.xpath, @namespaces)
+        if field.value
+          field.value
+        elsif node = doc.at_xpath(field.xpath, @namespaces)
           parse_value(field, node.content)
         elsif field.required?
-          raise NodeNotFound, "Unable to find node at '#{field.xpath}'"
+          raise NodeNotFound, "Unable to find '#{field.name}' using xpath '#{field.xpath}'"
         end
       end
     end
