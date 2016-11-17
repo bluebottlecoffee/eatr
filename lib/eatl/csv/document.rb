@@ -2,7 +2,11 @@ require 'csv'
 
 module Eatl
   module Csv
+    ValueNotFound = Class.new(StandardError)
+
     class Document
+      include ParseValue
+
       def initialize(schema_path)
         @schema = Schema.new(YAML.load(File.read(schema_path)))
       end
@@ -27,16 +31,9 @@ module Eatl
 
       def value_at(row, field)
         if text = row[field.csv_header]
-          case field.type
-          when 'integer' then text.to_i
-          when 'float' then text.to_f
-          when 'timestamp' then DateTime.parse(text)
-          when 'boolean' then YAML.load(text)
-          else
-            text
-          end
+          parse_value(field, text)
         elsif field.required?
-          raise NodeNotFound, "Unable to find node at '#{field.xpath}'"
+          raise ValueNotFound, "Unable to find value with header '#{field.csv_header}'"
         else
           ""
         end
