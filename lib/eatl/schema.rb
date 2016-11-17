@@ -21,6 +21,10 @@ module Eatl
         @field_attributes.has_key?('node')
       end
 
+      def csv_header
+        @field_attributes['csv_header']
+      end
+
       def required?
         @field_attributes.fetch('required', true)
       end

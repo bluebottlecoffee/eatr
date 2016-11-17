@@ -1,0 +1,12 @@
+---
+name: movie
+input_fields:
+  - name: title
+    csv_header: title
+    type: string
+  - name: rating
+    csv_header: rating
+    type: float
+  - name: release_year
+    csv_header: release_year
+    type: integer
