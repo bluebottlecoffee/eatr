@@ -29,6 +29,10 @@ module Eatl
         @field_attributes.fetch('required', true)
       end
 
+      def strptime
+        @field_attributes['strptime']
+      end
+
       def children
         Array[*@field_attributes['children']].map { |f| Field.new(f) }
       end

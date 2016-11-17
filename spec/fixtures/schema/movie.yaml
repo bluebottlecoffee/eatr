@@ -10,3 +10,7 @@ input_fields:
   - name: release_year
     csv_header: release_year
     type: integer
+  - name: release_date
+    csv_header: release_date
+    type: timestamp
+    strptime: '%m/%d/%Y'

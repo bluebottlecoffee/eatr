@@ -4,7 +4,12 @@ module Eatl
       case field.type
       when 'integer' then text.to_i
       when 'float' then text.to_f
-      when 'timestamp' then DateTime.parse(text)
+      when 'timestamp'
+        if field.strptime
+          DateTime.strptime(text, field.strptime)
+        else
+          DateTime.parse(text)
+        end
       when 'boolean' then YAML.load(text)
       else
         text
