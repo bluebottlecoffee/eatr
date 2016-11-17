@@ -1,6 +1,6 @@
 ---
 name: movie
-input_fields:
+fields:
   - name: title
     csv_header: title
     type: string

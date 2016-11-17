@@ -1,5 +1,5 @@
 name: library
-input_fields:
+fields:
   - node: books
     xpath: //Library/big:Books/book
     children:

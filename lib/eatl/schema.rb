@@ -42,8 +42,8 @@ module Eatl
       @schema = schema_hash
     end
 
-    def input_fields
-      @input_fields ||= @schema.fetch('input_fields').map { |f| Field.new(f) }
+    def fields
+      @fields ||= @schema.fetch('fields').map { |f| Field.new(f) }
     end
 
     def name
@@ -69,8 +69,8 @@ module Eatl
     end
 
     def field_names
-      input_fields.select(&:name).
-        concat(input_fields.flat_map(&:children)).
+      fields.select(&:name).
+        concat(fields.flat_map(&:children)).
         map { |f| f.name.to_sym }
     end
 

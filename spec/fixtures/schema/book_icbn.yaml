@@ -1,5 +1,5 @@
 name: book
-input_fields:
+fields:
   - name: author
     xpath: //author/firstName
     type: string

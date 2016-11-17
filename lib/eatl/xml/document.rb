@@ -26,7 +26,7 @@ module Eatl
           @namespaces = doc.collect_namespaces
         end
 
-        cardinality = @schema.input_fields.inject(1) do |memo, field|
+        cardinality = @schema.fields.inject(1) do |memo, field|
           if field.node?
             memo * doc.xpath(field.xpath, @namespaces).count
           else
@@ -40,7 +40,7 @@ module Eatl
           objects << @schema.to_struct.new
         end
 
-        @schema.input_fields.each do |field|
+        @schema.fields.each do |field|
           objects = set_field(objects, doc, field)
         end
 

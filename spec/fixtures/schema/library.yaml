@@ -1,6 +1,6 @@
 name: library
 remove_namespaces: true
-input_fields:
+fields:
   - node: books
     xpath: //Library/Books/book
     children:

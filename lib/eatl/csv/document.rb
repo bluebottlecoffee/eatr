@@ -17,7 +17,7 @@ module Eatl
         CSV.foreach(csv_document_path, headers: true) do |row|
           obj = @schema.to_struct.new
 
-          @schema.input_fields.each do |field|
+          @schema.fields.each do |field|
             obj.public_send("#{field.name}=", value_at(row, field))
           end
 

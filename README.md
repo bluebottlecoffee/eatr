@@ -50,7 +50,7 @@ You can use a schema definition like:
 
 ```yaml
 name: chapters
-input_fields:
+fields:
   - name: author
     xpath: //author/firstName
     type: string
