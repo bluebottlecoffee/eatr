@@ -18,3 +18,5 @@ input_fields:
   - name: icbn
     xpath: //icbn
     required: false
+  - name: hardcover
+    required: false

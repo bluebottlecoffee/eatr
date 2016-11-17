@@ -70,8 +70,6 @@ module Eatl
           parse_value(field, node.content)
         elsif field.required?
           raise NodeNotFound, "Unable to find node at '#{field.xpath}'"
-        else
-          ""
         end
       end
     end
