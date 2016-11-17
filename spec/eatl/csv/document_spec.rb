@@ -11,6 +11,7 @@ describe Eatl::Csv::Document do
     expect(books[0].rating).to eq(68)
     expect(books[0].release_year).to eq(1995)
     expect(books[0].release_date).to eq(Date.new(1995, 5, 24))
+    expect(books[0].lead_actor).to eq(nil)
     expect(books[1].title).to eq('The Matrix')
     expect(books[1].rating).to eq(73)
     expect(books[1].release_year).to eq(1999)

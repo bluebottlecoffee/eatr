@@ -34,8 +34,6 @@ module Eatl
           parse_value(field, text)
         elsif field.required?
           raise ValueNotFound, "Unable to find value with header '#{field.csv_header}'"
-        else
-          ""
         end
       end
     end
