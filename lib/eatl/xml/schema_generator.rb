@@ -32,13 +32,13 @@ module Eatl
           relative_path = Regexp.new(child.element_children.first.path.gsub(/\[\d+\]/, "\\[\\d+\\]"))
           node_path = child.element_children.first.path.gsub(/\[\d+\]/, "")
 
-          [{
+          {
             'node' => underscore(child.name),
             'xpath' => node_path,
             'children' => child.element_children.first.element_children.map do |c|
               field_def(c, name_prefix: "#{underscore(child.name)}_", xpath_relative_to: relative_path)
             end
-          }]
+          }
         elsif unique_children_count(child) >= 1
           child.element_children.flat_map do |c|
             field_def(c, name_prefix: "#{underscore(child.name)}_", xpath_relative_to: xpath_relative_to)
