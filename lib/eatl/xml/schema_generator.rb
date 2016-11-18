@@ -35,7 +35,7 @@ module Eatl
           {
             'node' => underscore(child.name),
             'xpath' => node_path,
-            'children' => child.element_children.first.element_children.map do |c|
+            'children' => child.element_children.first.element_children.flat_map do |c|
               field_def(c, name_prefix: "#{underscore(child.name)}_", xpath_relative_to: relative_path)
             end
           }
