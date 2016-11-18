@@ -25,7 +25,7 @@ fields:
 - node: chapters
   xpath: "/book/chapters/chapter"
   children:
-  - name: title
+  - name: chapters_title
     xpath: "./title"
 EXPECTED
   end

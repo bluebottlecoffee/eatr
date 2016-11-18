@@ -27,7 +27,7 @@ module Eatl
 
       private
 
-      def field_def(child, name_prefix: '')
+      def field_def(child, name_prefix: '', xpath_relative_to: nil)
         if unique_children_count(child) == 1 && child.element_children.map(&:name).count > 1
           relative_path = Regexp.new(child.element_children.first.path.gsub(/\[\d+\]/, "\\[\\d+\\]"))
           node_path = child.element_children.first.path.gsub(/\[\d+\]/, "")
@@ -36,21 +36,18 @@ module Eatl
             'node' => underscore(child.name),
             'xpath' => node_path,
             'children' => child.element_children.first.element_children.map do |c|
-              {
-                'name' => underscore(c.name),
-                'xpath' => c.path.gsub(relative_path, ".")
-              }
+              field_def(c, name_prefix: "#{underscore(child.name)}_", xpath_relative_to: relative_path)
             end
           }]
         elsif unique_children_count(child) >= 1
           child.element_children.flat_map do |c|
-            field_def(c, name_prefix: "#{underscore(child.name)}_")
+            field_def(c, name_prefix: "#{underscore(child.name)}_", xpath_relative_to: xpath_relative_to)
           end
         else
-          [{
+          {
             'name' => name_prefix + underscore(child.name),
-            'xpath' => child.path
-          }]
+            'xpath' => xpath_relative_to ? child.path.gsub(xpath_relative_to, ".") : child.path
+          }
         end
       end
 
