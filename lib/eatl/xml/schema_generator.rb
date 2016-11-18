@@ -33,7 +33,7 @@ module Eatl
           node_path = child.element_children.first.path.gsub(/\[\d+\]/, "")
 
           [{
-            'node' => child.name,
+            'node' => underscore(child.name),
             'xpath' => node_path,
             'children' => child.element_children.first.element_children.map do |c|
               {
