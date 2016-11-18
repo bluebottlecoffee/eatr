@@ -3,6 +3,9 @@
     <firstName>greggroth</firstName>
     <lastName>roth</lastName>
   </author>
+  <publisher>
+    <name>BBC</name>
+  </publisher>
   <publishedAt>2016-11-12T8:00:00Z</publishedAt>
   <forSale>no</forSale>
   <rating>8.9</rating>

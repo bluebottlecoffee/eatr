@@ -12,6 +12,8 @@ fields:
   xpath: "/book/author/firstName"
 - name: author_last_name
   xpath: "/book/author/lastName"
+- name: publisher_name
+  xpath: "/book/publisher/name"
 - name: published_at
   xpath: "/book/publishedAt"
 - name: for_sale

@@ -28,7 +28,7 @@ module Eatl
       private
 
       def field_def(child, name_prefix: '')
-        if unique_children_count(child) == 1
+        if unique_children_count(child) == 1 && child.element_children.map(&:name).count > 1
           relative_path = Regexp.new(child.element_children.first.path.gsub(/\[\d+\]/, "\\[\\d+\\]"))
           node_path = child.element_children.first.path.gsub(/\[\d+\]/, "")
 
@@ -42,7 +42,7 @@ module Eatl
               }
             end
           }]
-        elsif unique_children_count(child) > 1
+        elsif unique_children_count(child) >= 1
           child.element_children.flat_map do |c|
             field_def(c, name_prefix: "#{underscore(child.name)}_")
           end
