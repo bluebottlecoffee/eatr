@@ -7,4 +7,9 @@ fields:
     - name: title
       xpath: ./title
       type: string
-
+  - node: desks
+    xpath: //Library/Desks/desk
+    children:
+    - name: desk_number
+      xpath: ./number
+      type: string

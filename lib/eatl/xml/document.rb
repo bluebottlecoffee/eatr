@@ -28,7 +28,7 @@ module Eatl
 
         cardinality = @schema.fields.inject(1) do |memo, field|
           if field.node?
-            memo * doc.xpath(field.xpath, @namespaces).count
+            memo * [doc.xpath(field.xpath, @namespaces).count, 1].max
           else
             memo
           end
