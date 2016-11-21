@@ -33,8 +33,8 @@ module Eatl
           node_path = child.element_children.first.path.gsub(/\[\d+\]/, "")
 
           {
-            'node' => underscore(child.name),
-            'xpath' => node_path,
+            'node' => name_prefix + underscore(child.name),
+            'xpath' => xpath_relative_to ? child.path.gsub(xpath_relative_to, ".") : node_path,
             'children' => child.element_children.first.element_children.flat_map do |c|
               field_def(c, name_prefix: "#{underscore(child.name)}_", xpath_relative_to: relative_path)
             end
