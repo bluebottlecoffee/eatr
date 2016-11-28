@@ -92,8 +92,11 @@ Here is an example from the test suite of using this XML and schema defintion:
   - optional -- superceeds `xpath` or `csv_header` values
   - If set, this value will be used as the attribute's value
 - `strptime`
-  - optional -- only applicable if `type` is set to `timestamp`
+  - optional -- only applicable if `type` is `timestamp`
   - Format string used to parse the string into a `DateTime` object
+- `max_length`
+  - optional -- only applicable if `type` is `string`
+  - Truncate the string after `max_length` characters
 
 ## Fields for `Eatl::Csv::Document` schemas
 

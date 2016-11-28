@@ -37,6 +37,10 @@ module Eatl
         @field_attributes['value']
       end
 
+      def max_length
+        @field_attributes['max_length']
+      end
+
       def children
         Array[*@field_attributes['children']].map { |f| Field.new(f) }
       end

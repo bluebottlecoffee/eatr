@@ -29,6 +29,9 @@ fields:
 - name: pages
   xpath: "/book/pages"
   type: string
+- name: summary
+  xpath: "/book/summary"
+  type: string
 - node: chapters
   xpath: "/book/chapters/chapter"
   children:

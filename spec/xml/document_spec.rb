@@ -13,6 +13,7 @@ describe Eatl::Xml::Document do
     expect(books.first.rating).to eq(8.9)
     expect(books.first.for_sale).to eq(false)
     expect(books.first.age).to eq(12)
+    expect(books.first.summary).to eq('In this lovely ')
   end
 
   describe "parsing one document to multiple objects" do

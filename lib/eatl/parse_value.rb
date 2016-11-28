@@ -12,7 +12,11 @@ module Eatl
         end
       when 'boolean' then YAML.load(text)
       else
-        text
+        if field.max_length
+          text[0...field.max_length]
+        else
+          text
+        end
       end
     end
   end
