@@ -21,7 +21,6 @@ fields:
   - name: summary
     xpath: //summary
     max_length: 15
-  - name: hardcover
-    required: false
   - name: age
     value: 12
+    type: integer
