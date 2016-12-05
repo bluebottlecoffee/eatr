@@ -41,6 +41,10 @@ module Eatl
         @field_attributes['max_length']
       end
 
+      def belongs_to_many
+        @field_attributes['belongs_to_many']
+      end
+
       def children
         Array[*@field_attributes['children']].map { |f| Field.new(f) }
       end

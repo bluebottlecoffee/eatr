@@ -18,7 +18,7 @@ digraph g {
   edge [
   arrowhead = "none"
   ];
-"book" [shape=none, margin=0, label=<
+"books" [shape=none, margin=0, label=<
   <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue">books</td></tr>
     <tr><td port="id" align="left">id</td></tr>
@@ -51,7 +51,7 @@ digraph g {
   edge [
   arrowhead = "none"
   ];
-"book" [shape=none, margin=0, label=<
+"books" [shape=none, margin=0, label=<
   <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue">books</td></tr>
     <tr><td port="id" align="left">id</td></tr>
@@ -64,12 +64,13 @@ digraph g {
     <tr><td port="summary" align="left">summary</td></tr>
     <tr><td port="age" align="left">age</td></tr>
   </table>>];
-"chapter" [shape=none, margin=0, label=<
+"chapters" [shape=none, margin=0, label=<
   <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue">chapters</td></tr>
     <tr><td port="book_id" align="left">book_id</td></tr>
     <tr><td port="title" align="left">title</td></tr>
   </table>>];
+"chapters":"book_id" -> "books":"id" [style="dashed" dir="back" arrowtail="veevee"];
 }
       DOT
     end

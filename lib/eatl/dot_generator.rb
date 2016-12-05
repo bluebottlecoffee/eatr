@@ -12,5 +12,12 @@ module Eatl
     def to_dot
       ERB.new(File.read(@template_path), nil, '-').result(binding)
     end
+
+    private
+
+    def arrow_target(belongs_to_str)
+      table_name, column = belongs_to_str.split('.')
+      "\"#{table_name}\":\"#{column}\""
+    end
   end
 end

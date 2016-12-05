@@ -10,12 +10,19 @@ digraph g {
   arrowhead = "none"
   ];
 <%- tables.each do |table| -%>
-"<%= table.name %>" [shape=none, margin=0, label=<
+"<%= table.table_name %>" [shape=none, margin=0, label=<
   <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
     <tr><td bgcolor="lightblue"><%= table.table_name %></td></tr>
   <%- table.flat_fields.each do |field| -%>
     <tr><td port="<%= field.name %>" align="left"><%= field.name %></td></tr>
   <%- end -%>
   </table>>];
+<%- end -%>
+<%- tables.each do |table| -%>
+  <%- table.flat_fields.each do |field| -%>
+    <%- if field.belongs_to_many -%>
+"<%= table.table_name %>":"<%= field.name %>" -> <%= arrow_target(field.belongs_to_many) %> [style="dashed" dir="back" arrowtail="veevee"];
+    <%- end -%>
+  <%- end -%>
 <%- end -%>
 }
