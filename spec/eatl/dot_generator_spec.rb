@@ -70,7 +70,7 @@ digraph g {
     <tr><td port="book_id" align="left">book_id</td></tr>
     <tr><td port="title" align="left">title</td></tr>
   </table>>];
-"chapters":"book_id" -> "books":"id" [style="dashed" dir="back" arrowtail="veevee"];
+"chapters":"book_id" -> "books":"id" [style="dashed" dir="back"];
 }
       DOT
     end

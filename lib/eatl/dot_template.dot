@@ -20,8 +20,8 @@ digraph g {
 <%- end -%>
 <%- tables.each do |table| -%>
   <%- table.flat_fields.each do |field| -%>
-    <%- if field.belongs_to_many -%>
-"<%= table.table_name %>":"<%= field.name %>" -> <%= arrow_target(field.belongs_to_many) %> [style="dashed" dir="back" arrowtail="veevee"];
+    <%- if field.belongs_to_one -%>
+"<%= table.table_name %>":"<%= field.name %>" -> <%= arrow_target(field.belongs_to_one) %> [style="dashed" dir="back"];
     <%- end -%>
   <%- end -%>
 <%- end -%>

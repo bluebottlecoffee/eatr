@@ -5,44 +5,31 @@ module Eatl
         @field_attributes = field_attributes
       end
 
-      def name
-        @field_attributes['name']
+      %w[
+        name
+        type
+        xpath
+        csv_header
+        strptime
+        value
+        max_length
+        belongs_to_one
+      ].each do |f|
+        define_method(f) do
+          @field_attributes[f]
+        end
       end
 
       def type
         @field_attributes['type'].to_s.downcase
       end
 
-      def xpath
-        @field_attributes['xpath']
-      end
-
       def node?
         @field_attributes.has_key?('node')
       end
 
-      def csv_header
-        @field_attributes['csv_header']
-      end
-
       def required?
         @field_attributes.fetch('required', true)
-      end
-
-      def strptime
-        @field_attributes['strptime']
-      end
-
-      def value
-        @field_attributes['value']
-      end
-
-      def max_length
-        @field_attributes['max_length']
-      end
-
-      def belongs_to_many
-        @field_attributes['belongs_to_many']
       end
 
       def children

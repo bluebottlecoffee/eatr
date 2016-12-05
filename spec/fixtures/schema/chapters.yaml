@@ -4,7 +4,7 @@ fields:
   - name: book_id
     xpath: //book/id
     type: integer
-    belongs_to_many: books.id
+    belongs_to_one: books.id
   - node: chapters
     xpath: //chapters/chapter
     children:
