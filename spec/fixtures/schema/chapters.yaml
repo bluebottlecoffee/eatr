@@ -1,8 +1,10 @@
-name: chapters
+name: chapter
+table_name: chapters
 fields:
-  - name: author
-    xpath: //author/firstName
-    type: string
+  - name: book_id
+    xpath: //book/id
+    type: integer
+    references: books.id
   - node: chapters
     xpath: //chapters/chapter
     children:

@@ -1,5 +1,9 @@
 name: book
+table_name: books
 fields:
+  - name: id
+    xpath: //id
+    type: integer
   - name: author
     xpath: //author/firstName
     type: string

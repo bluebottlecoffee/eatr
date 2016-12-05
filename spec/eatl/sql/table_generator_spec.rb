@@ -6,6 +6,7 @@ describe Eatl::Sql::TableGenerator do
     generator = described_class.new('./spec/fixtures/schema/book.yaml')
     expect(generator.statement).to eq(<<-EXPECTED)
 CREATE TABLE book (
+  id INT NOT NULL,
   author TEXT NOT NULL,
   pages INT NOT NULL,
   for_sale BOOLEAN NOT NULL,

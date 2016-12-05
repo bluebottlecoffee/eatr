@@ -8,6 +8,9 @@ describe Eatl::Xml::SchemaGenerator do
 name: ''
 remove_namespaces: true
 fields:
+- name: id
+  xpath: "/book/id"
+  type: string
 - name: author_first_name
   xpath: "/book/author/firstName"
   type: string

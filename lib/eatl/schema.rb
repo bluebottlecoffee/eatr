@@ -54,8 +54,17 @@ module Eatl
       @fields ||= @schema.fetch('fields').map { |f| Field.new(f) }
     end
 
+    def flat_fields
+      @flat_fields ||= fields.select(&:name).
+        concat(fields.flat_map(&:children))
+    end
+
     def name
       @schema.fetch('name', 'schema')
+    end
+
+    def table_name
+      @schema.fetch('table_name', name)
     end
 
     def remove_namespaces?
@@ -77,9 +86,7 @@ module Eatl
     end
 
     def field_names
-      fields.select(&:name).
-        concat(fields.flat_map(&:children)).
-        map { |f| f.name.to_sym }
+      flat_fields.map { |f| f.name.to_sym }
     end
 
     def constantize(underscore_name)

@@ -1,0 +1,21 @@
+digraph g {
+  ranksep="1.6"
+  graph [
+  rankdir = "LR"
+  ];
+  node [
+  fontsize = "16"
+  ];
+  edge [
+  arrowhead = "none"
+  ];
+<%- tables.each do |table| -%>
+"<%= table.name %>" [shape=none, margin=0, label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue"><%= table.table_name %></td></tr>
+  <%- table.flat_fields.each do |field| -%>
+    <tr><td port="<%= field.name %>" align="left"><%= field.name %></td></tr>
+  <%- end -%>
+  </table>>];
+<%- end -%>
+}
