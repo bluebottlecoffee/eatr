@@ -31,7 +31,6 @@ strict digraph g {
     <tr><td port="summary" align="left">summary</td></tr>
     <tr><td port="age" align="left">age</td></tr>
   </table>>];
-"books":"id" -> "chapters":"book_id" [arrowhead="crow"];
 }
     DOT
   end

@@ -20,12 +20,14 @@ strict digraph g {
 <%- end -%>
 <%- tables.each do |table| -%>
   <%- table.flat_fields.each do |field| -%>
-    <%- if field.belongs_to_one -%>
+    <%- if field.belongs_to_one && table_included?(field.belongs_to_one)-%>
 "<%= table.table_name %>":"<%= field.name %>" -> <%= arrow_target(field.belongs_to_one) %> [arrowhead="tee"];
     <%- end -%>
     <%- if field.has_many -%>
       <%- field.has_many.each do |r| -%>
+        <%- if table_included?(r)-%>
 "<%= table.table_name %>":"<%= field.name %>" -> <%= arrow_target(r) %> [arrowhead="crow"];
+        <%- end -%>
       <%- end -%>
     <%- end -%>
   <%- end -%>

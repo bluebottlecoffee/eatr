@@ -15,6 +15,11 @@ module Eatl
 
     private
 
+    def table_included?(belongs_to_str)
+      table_name, _ = belongs_to_str.split('.')
+      @tables.any? { |t| t.table_name == table_name }
+    end
+
     def arrow_target(belongs_to_str)
       table_name, column = belongs_to_str.split('.')
       "\"#{table_name}\":\"#{column}\""
