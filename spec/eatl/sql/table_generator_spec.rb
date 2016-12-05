@@ -8,6 +8,7 @@ describe Eatl::Sql::TableGenerator do
 CREATE TABLE book (
   id INT NOT NULL,
   author TEXT NOT NULL,
+  library_id INT,
   pages INT NOT NULL,
   for_sale BOOLEAN NOT NULL,
   published_at TIMESTAMP NOT NULL,

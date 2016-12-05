@@ -9,6 +9,10 @@ fields:
   - name: author
     xpath: //author/firstName
     type: string
+  - name: library_id
+    required: false
+    type: integer
+    belongs_to_one: libraries.id
   - name: pages
     xpath: //pages
     type: integer

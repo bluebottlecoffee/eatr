@@ -1,10 +1,14 @@
 name: library
+table_name: libraries
 remove_namespaces: true
 fields:
+  - name: id
+    type: integer
+    required: false
   - node: books
     xpath: //Library/Books/book
     children:
-    - name: title
+    - name: book_title
       xpath: ./title
       type: string
   - node: desks

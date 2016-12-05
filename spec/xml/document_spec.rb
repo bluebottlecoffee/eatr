@@ -46,8 +46,8 @@ describe Eatl::Xml::Document do
     it "allows navigating the document without namespaces" do
       books = Eatl::Xml::Document.new(schema).parse(document)
       expect(books.count).to eq(2)
-      expect(books[0].title).to eq('Handy Book 1')
-      expect(books[1].title).to eq('Handy Book 2')
+      expect(books[0].book_title).to eq('Handy Book 1')
+      expect(books[1].book_title).to eq('Handy Book 2')
     end
   end
 
