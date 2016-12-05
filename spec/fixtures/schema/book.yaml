@@ -4,6 +4,8 @@ fields:
   - name: id
     xpath: //id
     type: integer
+    has_many:
+      - chapters.book_id
   - name: author
     xpath: //author/firstName
     type: string

@@ -1,4 +1,4 @@
-digraph g {
+strict digraph g {
   ranksep="1.6"
   graph [
   rankdir = "LR"
@@ -22,6 +22,11 @@ digraph g {
   <%- table.flat_fields.each do |field| -%>
     <%- if field.belongs_to_one -%>
 "<%= table.table_name %>":"<%= field.name %>" -> <%= arrow_target(field.belongs_to_one) %> [arrowhead="tee"];
+    <%- end -%>
+    <%- if field.has_many -%>
+      <%- field.has_many.each do |r| -%>
+"<%= table.table_name %>":"<%= field.name %>" -> <%= arrow_target(r) %> [arrowhead="crow"];
+      <%- end -%>
     <%- end -%>
   <%- end -%>
 <%- end -%>

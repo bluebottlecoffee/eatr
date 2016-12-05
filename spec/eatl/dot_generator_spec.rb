@@ -7,7 +7,7 @@ describe Eatl::DotGenerator do
 
   it "generates a valid DOT file of the table schema" do
     expect(subject.to_dot).to eq(<<-DOT)
-digraph g {
+strict digraph g {
   ranksep="1.6"
   graph [
   rankdir = "LR"
@@ -31,6 +31,7 @@ digraph g {
     <tr><td port="summary" align="left">summary</td></tr>
     <tr><td port="age" align="left">age</td></tr>
   </table>>];
+"books":"id" -> "chapters":"book_id" [arrowhead="crow"];
 }
     DOT
   end
@@ -40,7 +41,7 @@ digraph g {
 
     it "generates a valid DOT file of the table schema" do
       expect(subject.to_dot).to eq(<<-DOT)
-digraph g {
+strict digraph g {
   ranksep="1.6"
   graph [
   rankdir = "LR"
@@ -70,6 +71,7 @@ digraph g {
     <tr><td port="book_id" align="left">book_id</td></tr>
     <tr><td port="title" align="left">title</td></tr>
   </table>>];
+"books":"id" -> "chapters":"book_id" [arrowhead="crow"];
 "chapters":"book_id" -> "books":"id" [arrowhead="tee"];
 }
       DOT

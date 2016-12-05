@@ -14,6 +14,7 @@ module Eatl
         value
         max_length
         belongs_to_one
+        has_many
       ].each do |f|
         define_method(f) do
           @field_attributes[f]
