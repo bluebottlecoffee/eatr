@@ -21,7 +21,7 @@ digraph g {
 <%- tables.each do |table| -%>
   <%- table.flat_fields.each do |field| -%>
     <%- if field.belongs_to_one -%>
-"<%= table.table_name %>":"<%= field.name %>" -> <%= arrow_target(field.belongs_to_one) %> [style="dashed" dir="back"];
+"<%= table.table_name %>":"<%= field.name %>" -> <%= arrow_target(field.belongs_to_one) %> [arrowhead="tee"];
     <%- end -%>
   <%- end -%>
 <%- end -%>
