@@ -47,7 +47,8 @@ module Eatl
           {
             'name' => name_prefix + underscore(child.name),
             'xpath' => xpath_relative_to ? child.path.gsub(xpath_relative_to, ".") : child.path,
-            'type' => 'string'
+            'type' => 'string',
+            'required' => false
           }
         end
       end
