@@ -7,7 +7,7 @@ module Eatl
 
       def statement
         <<-STATEMENT
-CREATE TABLE #{@schema.name} (
+CREATE TABLE #{@schema.table_name} (
   #{column_defs.join(",\n  ")}
 );
         STATEMENT

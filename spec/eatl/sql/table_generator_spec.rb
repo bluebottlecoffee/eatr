@@ -5,7 +5,7 @@ describe Eatl::Sql::TableGenerator do
   it 'generates a CREATE TABLE statement from a schema' do
     generator = described_class.new('./spec/fixtures/schema/book.yaml')
     expect(generator.statement).to eq(<<-EXPECTED)
-CREATE TABLE book (
+CREATE TABLE books (
   id INT NOT NULL,
   author TEXT NOT NULL,
   library_id INT,
