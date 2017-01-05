@@ -140,13 +140,13 @@ Node field attributes:
 ## Helpful Tools
 
 Included are a few two helper classes:
-  - `Eatl::Xml::SchemaGenerator` creates a rough schema file from a sample XML file.
-  - `Eatl::Sql::TableGenerator` creates a SQL `CREATE TABLE` statement from a schema file.
-  - `Eatl::DotGenerator` creates a Graphviz DOT file for visualizing schema relationships (experimental).
+  - [`Eatl::Xml::SchemaGenerator`](#eatlxmlschemagenerator) creates a rough schema file from a sample XML file.
+  - [`Eatl::Sql::TableGenerator`](#eatlsqltablegenerator) creates a SQL `CREATE TABLE` statement from a schema file.
+  - [`Eatl::DotGenerator`](#eatldotgenerator) creates a Graphviz DOT file for visualizing schema relationships (experimental).
 
 ### `Eatl::Xml::SchemaGenerator`
 
-Given a sample XML file, this class can be used to generate a schema definition.  For example, from [the spec](https://github.com/bluebottlecoffee/eatl/blob/master/spec/xml/schema_generator_spec.rb) you can see that given the XML:
+Given a sample XML file, this class can be used to generate a schema definition.  For example, from [the spec](spec/xml/schema_generator_spec.rb) you can see that given the XML:
 
 ```xml
 <book>
@@ -237,7 +237,7 @@ new documents.
 ### `Eatl::Sql::TableGenerator`
 
 This utility is helpful for generating `CREATE TABLE` statements from a schema.
-From [the tests](https://github.com/bluebottlecoffee/eatl/blob/master/spec/eatl/sql/table_generator_spec.rb):
+From [the tests](eatl/sql/table_generator_spec.rb):
 
 ```ruby
 > require 'eatl/sql/table_generator'
@@ -277,7 +277,7 @@ The values at the keys should reference another schema file as `<table_name>.<fi
   belongs_to_one: libraries.id
 ```
 
-Following is a complete example taken from [the tests](https://github.com/bluebottlecoffee/eatl/blob/master/spec/eatl/dot_generator_spec.rb):
+Following is a complete example taken from [the tests](spec/eatl/dot_generator_spec.rb):
 
 
 ```ruby
@@ -329,9 +329,9 @@ Following is a complete example taken from [the tests](https://github.com/bluebo
 
 Which used to generate a PNG, looks like:
 
-![Sample DOT ERD](https://raw.github.com/bluebottlecoffee/eatl/master/spec/example_dot.png)
+![Sample DOT ERD](eatl/spec/example_dot.png)
 
-By default, a [built-in template](https://github.com/bluebottlecoffee/eatl/blob/master/lib/eatl/dot_template.dot)is used, however you can provide your own template:
+By default, a [built-in template](lib/eatl/dot_template.dot)is used, however you can provide your own template:
 
 ```ruby
 Eatl::DotGenerator.new(['path/to/schema.yaml'], template_path: 'path/to/dot_template.dot')
