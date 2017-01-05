@@ -139,9 +139,10 @@ Node field attributes:
 
 ## Helpful Tools
 
-Included are two helper classes for generating schema files from a sample XML
-document and generating a SQL `CREATE TABLE` statement from a schema.  Since
-these are utility classes, they are _not_ `require`'d by default.
+Included are a few two helper classes:
+  - `Eatl::Xml::SchemaGenerator` creates a rough schema file from a sample XML file.
+  - `Eatl::Sql::TableGenerator` creates a SQL `CREATE TABLE` statement from a schema file.
+  - `Eatl::DotGenerator` creates a Graphviz DOT file for visualizing schema relationships (experimental).
 
 ### `Eatl::Xml::SchemaGenerator`
 
@@ -178,8 +179,8 @@ A schema can be generated using the following:
 ```ruby
 > require 'eatl/xml/schema_generator'
 > generator = Eatl::Xml::SchemaGenerator.new('./spec/fixtures/xml/book.xml')
-puts generator.schema('/book')
----
+> puts generator.schema('/book')
+=> ---
 name: ''
 remove_namespaces: true
 fields:
@@ -242,7 +243,7 @@ From [the tests](https://github.com/bluebottlecoffee/eatl/blob/master/spec/eatl/
 > require 'eatl/sql/table_generator'
 > generator = Eatl::Sql::TableGenerator.new('./spec/fixtures/schema/book.yaml')
 > puts generator.statement
-#> CREATE TABLE books (
+=> CREATE TABLE books (
   id INT NOT NULL,
   author TEXT NOT NULL,
   library_id INT,
@@ -258,6 +259,85 @@ From [the tests](https://github.com/bluebottlecoffee/eatl/blob/master/spec/eatl/
 
 When working with large schema files, this can greatly reduce the amount of
 effort required to set up database tables.
+
+
+### `Eatl::DotGenerator`
+
+This is currently a work-in-progress class, but currently supports specifying two types of relationships as field key:
+
+  - `belongs_to_one`
+  - `has_many`
+
+The values at the keys should reference another schema file as `<table_name>.<field name>`.  For example, from `book.yaml`:
+
+```yaml
+- name: library_id
+  required: false
+  type: integer
+  belongs_to_one: libraries.id
+```
+
+Following is a complete example taken from [the tests](https://github.com/bluebottlecoffee/eatl/blob/master/spec/eatl/dot_generator_spec.rb):
+
+
+```ruby
+> generator = Eatl::DotGenerator.new(['./spec/fixtures/schema/book.yaml', './spec/fixtures/schema/chapters.yaml', './spec/fixtures/schema/library.yaml'])
+> puts generator.to_dot
+=> strict digraph g {
+  ranksep="1.6"
+  graph [
+  rankdir = "LR"
+  ];
+  node [
+  fontsize = "16"
+  ];
+  edge [
+  arrowhead = "none"
+  ];
+"books" [shape=none, margin=0, label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue">books</td></tr>
+    <tr><td port="id" align="left">id</td></tr>
+    <tr><td port="author" align="left">author</td></tr>
+    <tr><td port="library_id" align="left">library_id</td></tr>
+    <tr><td port="pages" align="left">pages</td></tr>
+    <tr><td port="for_sale" align="left">for_sale</td></tr>
+    <tr><td port="published_at" align="left">published_at</td></tr>
+    <tr><td port="rating" align="left">rating</td></tr>
+    <tr><td port="icbn" align="left">icbn</td></tr>
+    <tr><td port="summary" align="left">summary</td></tr>
+    <tr><td port="age" align="left">age</td></tr>
+  </table>>];
+"chapters" [shape=none, margin=0, label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue">chapters</td></tr>
+    <tr><td port="book_id" align="left">book_id</td></tr>
+    <tr><td port="title" align="left">title</td></tr>
+  </table>>];
+"libraries" [shape=none, margin=0, label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+    <tr><td bgcolor="lightblue">libraries</td></tr>
+    <tr><td port="id" align="left">id</td></tr>
+    <tr><td port="book_title" align="left">book_title</td></tr>
+    <tr><td port="desk_number" align="left">desk_number</td></tr>
+  </table>>];
+"books":"id" -> "chapters":"book_id" [arrowhead="crow"];
+"books":"library_id" -> "libraries":"id" [arrowhead="teeodot"];
+"chapters":"book_id" -> "books":"id" [arrowhead="tee"];
+}
+```
+
+Which used to generate a PNG, looks like:
+
+![Sample DOT ERD](https://raw.github.com/bluebottlecoffee/eatl/master/spec/example_dot.png)
+
+By default, a [built-in template](https://github.com/bluebottlecoffee/eatl/blob/master/lib/eatl/dot_template.dot)is used, however you can provide your own template:
+
+```ruby
+Eatl::DotGenerator.new(['path/to/schema.yaml'], template_path: 'path/to/dot_template.dot')
+```
+
+The template is processed using ERB, so the provided template should be referenced when creating your own.
 
 ## Development
 
