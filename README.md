@@ -4,6 +4,19 @@ Configuration-based XML and CSV document parsing library.  Define structs in
 YAML configuration files and parse documents to create and populate the
 structs.
 
+## Table of Contents
+
+* [Installation](#installation)
+* [Parsing Documents](#parsing-documents)
+  * [Schema Fields Reference](#schema-fields-reference)
+    * [Common Header Attributes](#common-header-attributes)
+    * [Fields for `Eatl::Csv::Document` schemas](#fields-for-eatlcsvdocument-schemas)
+    * [Fields for `Eatl::Xml::Document` schemas](#fields-for-eatlxmldocument-schemas)
+* [Helpful Tools](#helpful-tools)
+  * [`Eatl::Xml::SchemaGenerator`](#eatlxmlschemagenerator)
+  * [`Eatl::Sql::TableGenerator`](#eatlsqltablegenerator)
+  * [`Eatl::DotGenerator`](#eatldotgenerator)
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -20,12 +33,12 @@ Or install it yourself as:
 
     $ gem install eatl
 
-## Usage
+## Parsing Documents
 
-The library supports creating a collection of struct of arbirary cardinality.
-For example, if you're interested in capturing all the chapters from an XML
-representation of a book, but also want to capture higher-level keys such as
-the author:
+The library supports creating a collection of struct objects of arbirary
+cardinality.  For example, if you're interested in capturing all the chapters
+from an XML representation of a book, but also want to capture higher-level
+keys such as the author:
 
 ```xml
 <book>
@@ -70,9 +83,9 @@ Here is an example from the test suite of using this XML and schema defintion:
  #<struct Struct::Chapters author="greggroth", title="Ch 2">]
 ```
 
-## Schema Fields Reference
+### Schema Fields Reference
 
-### Header Attributes
+#### Common Header Attributes
 
 - `name`
   - Name of the document this schema represents
@@ -113,13 +126,13 @@ Here is an example from the test suite of using this XML and schema defintion:
   - optional -- only applicable if `type` is `string`
   - Truncate the string after `length` characters
 
-### Fields for `Eatl::Csv::Document` schemas
+#### Fields for `Eatl::Csv::Document` schemas
 
 - `csv_header`
   - required
   - Name of header the field is expected to be under
 
-### Fields for `Eatl::Xml::Document` schemas
+#### Fields for `Eatl::Xml::Document` schemas
 
 - `xpath`
   - required
