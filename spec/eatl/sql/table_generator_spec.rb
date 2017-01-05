@@ -19,4 +19,15 @@ CREATE TABLE books (
 );
 EXPECTED
   end
+
+  it 'generates a CREATE TABLE statement with a schema has nodes' do
+    generator = described_class.new('./spec/fixtures/schema/library.yaml')
+    expect(generator.statement).to eq(<<-EXPECTED)
+CREATE TABLE libraries (
+  id INT,
+  book_title TEXT NOT NULL,
+  desk_number CHAR(4) NOT NULL
+);
+EXPECTED
+  end
 end

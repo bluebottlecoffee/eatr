@@ -16,7 +16,7 @@ CREATE TABLE #{@schema.table_name} (
       private
 
       def column_defs
-        @schema.fields.map do |f|
+        @schema.flat_fields.map do |f|
           "#{f.name} #{type(f)}#{nullness(f)}"
         end
       end
@@ -24,7 +24,9 @@ CREATE TABLE #{@schema.table_name} (
       def type(f)
         case f.type
         when nil,'string',''
-          if f.max_length
+          if f.length
+            "CHAR(#{f.length})"
+          elsif f.max_length
             "VARCHAR(#{f.max_length})"
           else
             'TEXT'

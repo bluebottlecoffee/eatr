@@ -17,3 +17,4 @@ fields:
     - name: desk_number
       xpath: ./number
       type: string
+      length: 4

@@ -13,6 +13,7 @@ module Eatl
         strptime
         value
         max_length
+        length
         belongs_to_one
         has_many
       ].each do |f|

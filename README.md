@@ -97,6 +97,9 @@ Here is an example from the test suite of using this XML and schema defintion:
 - `max_length`
   - optional -- only applicable if `type` is `string`
   - Truncate the string after `max_length` characters
+- `length`
+  - optional -- only applicable if `type` is `string`
+  - Truncate the string after `length` characters
 
 ## Fields for `Eatl::Csv::Document` schemas
 

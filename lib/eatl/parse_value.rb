@@ -14,6 +14,8 @@ module Eatl
       else
         if field.max_length
           text[0...field.max_length]
+        elsif field.length
+          text[0...field.length]
         else
           text
         end
