@@ -70,9 +70,9 @@ Here is an example from the test suite of using this XML and schema defintion:
  #<struct Struct::Chapters author="greggroth", title="Ch 2">]
 ```
 
-## Common Fields
+## Schema Fields Reference
 
-Header attributes:
+### Header Attributes
 
 - `name`
   - Name of the document this schema represents
@@ -113,13 +113,13 @@ Header attributes:
   - optional -- only applicable if `type` is `string`
   - Truncate the string after `length` characters
 
-## Fields for `Eatl::Csv::Document` schemas
+### Fields for `Eatl::Csv::Document` schemas
 
 - `csv_header`
   - required
   - Name of header the field is expected to be under
 
-## Fields for `Eatl::Xml::Document` schemas
+### Fields for `Eatl::Xml::Document` schemas
 
 - `xpath`
   - required
@@ -137,6 +137,127 @@ Node field attributes:
   - required
   - Collection of normal field definitions, except their `xpath` is relative to the child document defined per the `xpath` of the parent node.
 
+## Helpful Tools
+
+Included are two helper classes for generating schema files from a sample XML
+document and generating a SQL `CREATE TABLE` statement from a schema.  Since
+these are utility classes, they are _not_ `require`'d by default.
+
+### `Eatl::Xml::SchemaGenerator`
+
+Given a sample XML file, this class can be used to generate a schema definition.  For example, from [the spec](https://github.com/bluebottlecoffee/eatl/blob/master/spec/xml/schema_generator_spec.rb) you can see that given the XML:
+
+```xml
+<book>
+  <id>1</id>
+  <author>
+    <firstName>greggroth</firstName>
+    <lastName>roth</lastName>
+  </author>
+  <publisher>
+    <name>BBC</name>
+  </publisher>
+  <publishedAt>2016-11-12T8:00:00Z</publishedAt>
+  <forSale>no</forSale>
+  <rating>8.9</rating>
+  <pages>120</pages>
+  <summary>In this lovely tale, an intrepid warrior ventures out to save a princess.</summary>
+  <chapters>
+    <chapter>
+      <title>Ch 1</title>
+    </chapter>
+    <chapter>
+      <title>Ch 2</title>
+    </chapter>
+  </chapters>
+</book>
+```
+
+A schema can be generated using the following:
+
+```ruby
+> require 'eatl/xml/schema_generator'
+> generator = Eatl::Xml::SchemaGenerator.new('./spec/fixtures/xml/book.xml')
+puts generator.schema('/book')
+---
+name: ''
+remove_namespaces: true
+fields:
+- name: id
+  xpath: "/book/id"
+  type: string
+  required: false
+- name: author_first_name
+  xpath: "/book/author/firstName"
+  type: string
+  required: false
+- name: author_last_name
+  xpath: "/book/author/lastName"
+  type: string
+  required: false
+- name: publisher_name
+  xpath: "/book/publisher/name"
+  type: string
+  required: false
+- name: published_at
+  xpath: "/book/publishedAt"
+  type: string
+  required: false
+- name: for_sale
+  xpath: "/book/forSale"
+  type: string
+  required: false
+- name: rating
+  xpath: "/book/rating"
+  type: string
+  required: false
+- name: pages
+  xpath: "/book/pages"
+  type: string
+  required: false
+- name: summary
+  xpath: "/book/summary"
+  type: string
+  required: false
+- node: chapters
+  xpath: "/book/chapters/chapter"
+  children:
+  - name: chapters_title
+    xpath: "./title"
+    type: string
+    required: false
+```
+
+The schema generated should be treated as a starting place rather than a full
+solution since no attempt is made to detect types and all fields are considered
+optional by default.  Nonetheless, this can save a lot of time when setting up
+new documents.
+
+### `Eatl::Sql::TableGenerator`
+
+This utility is helpful for generating `CREATE TABLE` statements from a schema.
+From [the tests](https://github.com/bluebottlecoffee/eatl/blob/master/spec/eatl/sql/table_generator_spec.rb):
+
+```ruby
+> require 'eatl/sql/table_generator'
+> generator = Eatl::Sql::TableGenerator.new('./spec/fixtures/schema/book.yaml')
+> puts generator.statement
+#> CREATE TABLE books (
+  id INT NOT NULL,
+  author TEXT NOT NULL,
+  library_id INT,
+  pages INT NOT NULL,
+  for_sale BOOLEAN NOT NULL,
+  published_at TIMESTAMP NOT NULL,
+  rating REAL NOT NULL,
+  icbn TEXT,
+  summary VARCHAR(15) NOT NULL,
+  age INT NOT NULL
+);
+```
+
+When working with large schema files, this can greatly reduce the amount of
+effort required to set up database tables.
 
 ## Development
 

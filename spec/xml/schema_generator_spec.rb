@@ -1,4 +1,5 @@
 require 'spec_helper'
+require './lib/eatl/xml/schema_generator'
 
 describe Eatl::Xml::SchemaGenerator do
   it 'generates a schema from a sample XML document' do
