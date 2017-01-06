@@ -37,7 +37,7 @@ fields:
     value: 12
     type: integer
 transformations:
-  - class: Eatl::Transformation::AddDateId
+  - class: Eatr::Transformation::AddDateId
     args:
       source: published_at
       destination: published_at_date_id

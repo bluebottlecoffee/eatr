@@ -1,3 +1,3 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
-require "eatl"
+require "./lib/eatr"
 require "pry"
