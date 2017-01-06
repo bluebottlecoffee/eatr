@@ -1,8 +1,19 @@
 # Eatr
 
-Configuration-based XML and CSV document parsing and transformation library.
-Define structs in YAML configuration files and parse documents to create and
-populate the structs.
+Parsing a collection of XML documents often results in code that is a mixture
+of XPaths and nested loops, which are difficult to understand at a glance and
+maintain.  Additionally, there's often a need for common transformations such
+as parsing a timestamp or truncating a string.  [Separating data from the
+code](http://wiki.c2.com/?SeparationOfDataAndCode) is beneficial since the data
+file can be parsed by multiple languages or used by a [collection of
+tools](#helpful-tools).  For example, this library provides a helper class for
+creating SQL `CREATE TABLE` statements.
+
+Eatr is a simple framework that allows you to describe the struct you want
+populated by a document in a YAML configuration file.  For each field, you
+specify where it's value can be found in teh document using either XPath in the
+case of XML documents or header name in CSVs.  For an example of this, [see
+below in the Parsing Documents section](#parsing-documents).
 
 ## Table of Contents
 
