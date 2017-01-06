@@ -72,6 +72,10 @@ module Eatl
                         end
     end
 
+    def transformation_pipeline
+      Eatl::Pipeline.new(TransformationSet.new(@schema.fetch('transformations', [])))
+    end
+
     private
 
     def constant_name

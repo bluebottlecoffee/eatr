@@ -7,6 +7,12 @@ module Eatl
 
     class Document
       include ParseValue
+      extend Forwardable
+
+      attr_reader :schema
+
+      def_delegator :schema,
+        :transformation_pipeline
 
       def initialize(schema_path)
         @schema = Schema.new(YAML.load(File.read(schema_path)))
@@ -68,10 +74,12 @@ module Eatl
       def value_at(doc, field)
         if field.value
           field.value
-        elsif node = doc.at_xpath(field.xpath, @namespaces)
-          parse_value(field, node.content)
-        elsif field.required?
-          raise NodeNotFound, "Unable to find '#{field.name}' using xpath '#{field.xpath}'"
+        elsif field.xpath
+          if node = doc.at_xpath(field.xpath, @namespaces)
+            parse_value(field, node.content)
+          elsif field.required?
+            raise NodeNotFound, "Unable to find '#{field.name}' using xpath '#{field.xpath}'"
+          end
         end
       end
     end

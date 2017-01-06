@@ -22,6 +22,8 @@ fields:
   - name: published_at
     xpath: //publishedAt
     type: timestamp
+  - name: published_at_date_id
+    type: integer
   - name: rating
     xpath: //rating
     type: float
@@ -34,3 +36,8 @@ fields:
   - name: age
     value: 12
     type: integer
+transformations:
+  - class: Eatl::Transformation::AddDateId
+    args:
+      source: published_at
+      destination: published_at_date_id

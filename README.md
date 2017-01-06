@@ -12,6 +12,7 @@ structs.
     * [Common Header Attributes](#common-header-attributes)
     * [Fields for `Eatl::Csv::Document` schemas](#fields-for-eatlcsvdocument-schemas)
     * [Fields for `Eatl::Xml::Document` schemas](#fields-for-eatlxmldocument-schemas)
+* [Transformation Pipeline](#transformation-pipeline)
 * [Helpful Tools](#helpful-tools)
   * [`Eatl::Xml::SchemaGenerator`](#eatlxmlschemagenerator)
   * [`Eatl::Sql::TableGenerator`](#eatlsqltablegenerator)
@@ -78,7 +79,7 @@ fields:
 Here is an example from the test suite of using this XML and schema defintion:
 
 ```ruby
-> chapters = Eatl::Xml::Document.new('./spec/fixtures/schema/book.yaml' ).parse('./spec/fixtures/xml/book.xml' )
+> chapters = Eatl::Xml::Document.new('./spec/fixtures/schema/chapters.yaml').parse('./spec/fixtures/xml/book.xml')
 => [#<struct Struct::Chapters author="greggroth", title="Ch 1">,
  #<struct Struct::Chapters author="greggroth", title="Ch 2">]
 ```
@@ -149,6 +150,62 @@ Node field attributes:
 - `children`:
   - required
   - Collection of normal field definitions, except their `xpath` is relative to the child document defined per the `xpath` of the parent node.
+
+## Transformation Pipeline
+
+The transformation options provided are lightweight, but very flexible.  A
+class `Eatl::Pipeline` is used to execute a set of transformations, which are
+simply any object that can be initialized with a hash and responds to `#call`
+with a collection of structs.
+
+For example, if you wanted to add a date ID field generated from a timestamp, the schema file should add a `transformations` key:
+
+```yaml
+transformations:
+  - class: Eatl::Transformation::AddDateId
+    args:
+      source: published_at
+      destination: published_at_date_id
+```
+
+The `transformations` key should point to an array of objects with at least a `class` key.  The `class` is the transformer's class name and can be anything that can be looked up using `Object.const_get`.  The `args` key is optional and is passed to `initialize`.
+
+Following is an example of loading a schema file, creating an array of `Book`
+struct objects, and applying the transformation defined in the schema.
+
+```ruby
+> document = Eatl::Xml::Document.new('./spec/fixtures/schema/book.yaml')
+> books = document.parse('./spec/fixtures/xml/book.xml')
+=> [#<struct Struct::Book
+  id=1,
+  author="greggroth",
+  library_id=nil,
+  pages=120,
+  for_sale=false,
+  published_at=#<DateTime: 2016-11-12T08:00:00+00:00 ((2457705j,28800s,0n),+0s,2299161j)>,
+  published_at_date_id=nil,
+  rating=8.9,
+  icbn=nil,
+  summary="In this lovely ",
+  age=12>]
+> document.schema.transformation_pipeline.call(books)
+=> [#<struct Struct::Book
+  id=1,
+  author="greggroth",
+  library_id=nil,
+  pages=120,
+  for_sale=false,
+  published_at=#<DateTime: 2016-11-12T08:00:00+00:00 ((2457705j,28800s,0n),+0s,2299161j)>,
+  published_at_date_id=20161112,
+  rating=8.9,
+  icbn=nil,
+  summary="In this lovely ",
+  age=12>]
+```
+
+This library only provides the `AddDateId` transformer, however you can create
+your own transformation classes.  See the source for `AddDateId` for reference
+on how a transformer can be set up.
 
 ## Helpful Tools
 

@@ -6,6 +6,12 @@ module Eatl
 
     class Document
       include ParseValue
+      extend Forwardable
+
+      attr_reader :schema
+
+      def_delegator :schema,
+        :transformation_pipeline
 
       def initialize(schema_path)
         @schema = Schema.new(YAML.load(File.read(schema_path)))

@@ -12,6 +12,7 @@ CREATE TABLE books (
   pages INT NOT NULL,
   for_sale BOOLEAN NOT NULL,
   published_at TIMESTAMP NOT NULL,
+  published_at_date_id INT NOT NULL,
   rating REAL NOT NULL,
   icbn TEXT,
   summary VARCHAR(15) NOT NULL,

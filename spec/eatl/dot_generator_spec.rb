@@ -27,6 +27,7 @@ strict digraph g {
     <tr><td port="pages" align="left">pages</td></tr>
     <tr><td port="for_sale" align="left">for_sale</td></tr>
     <tr><td port="published_at" align="left">published_at</td></tr>
+    <tr><td port="published_at_date_id" align="left">published_at_date_id</td></tr>
     <tr><td port="rating" align="left">rating</td></tr>
     <tr><td port="icbn" align="left">icbn</td></tr>
     <tr><td port="summary" align="left">summary</td></tr>
@@ -61,6 +62,7 @@ strict digraph g {
     <tr><td port="pages" align="left">pages</td></tr>
     <tr><td port="for_sale" align="left">for_sale</td></tr>
     <tr><td port="published_at" align="left">published_at</td></tr>
+    <tr><td port="published_at_date_id" align="left">published_at_date_id</td></tr>
     <tr><td port="rating" align="left">rating</td></tr>
     <tr><td port="icbn" align="left">icbn</td></tr>
     <tr><td port="summary" align="left">summary</td></tr>
