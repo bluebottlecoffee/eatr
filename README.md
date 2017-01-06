@@ -399,7 +399,7 @@ Following is a complete example taken from [the tests](spec/eatl/dot_generator_s
 
 Which used to generate a PNG, looks like:
 
-![Sample DOT ERD](eatl/spec/example_dot.png)
+![Sample DOT ERD](spec/example_dot.png)
 
 By default, a [built-in template](lib/eatl/dot_template.dot)is used, however you can provide your own template:
 
