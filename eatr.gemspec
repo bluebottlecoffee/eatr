@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Greggory Rothmeier"]
   spec.email         = ["greggroth@gmail.com"]
 
-  spec.summary       = %q{Config-based ETL}
-  spec.description   = %q{Config-based ETL}
+  spec.summary       = %q{Configuration-based document parsing and transformation framework.}
+  spec.description   = %q{Configuration-based document parsing and transformation framework.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
