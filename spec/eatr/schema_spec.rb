@@ -16,12 +16,20 @@ describe Eatr::Schema do
     end
   end
 
+  class Book
+    def correct_book?
+      false
+    end
+  end
+
   describe '#to_struct' do
     it 'creates a Struct from a schema' do
       schema = Eatr::Schema.new(YAML.load(File.read(schema_file)))
       expect(schema.to_struct).to eq(Struct::Book)
+      expect(!schema.to_struct.respond_to?(:correct_book?))
       schema = Eatr::Schema.new(YAML.load(File.read(schema_file)))
       expect(schema.to_struct).to eq(Struct::Book)
+      expect(!schema.to_struct.respond_to?(:correct_book?))
     end
   end
 end
