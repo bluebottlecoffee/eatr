@@ -4,7 +4,7 @@ describe Eatr::Xml::Document do
   let(:document) { './spec/fixtures/xml/book.xml' }
   let(:schema) { './spec/fixtures/schema/book.yaml' }
 
-  it "applies a schema to an XML document" do
+  it "applies a schema to an XML file" do
     books = Eatr::Xml::Document.new(schema).parse(document)
     expect(books.count).to eq(1)
     expect(books.first.author).to eq('greggroth')
@@ -14,6 +14,11 @@ describe Eatr::Xml::Document do
     expect(books.first.for_sale).to eq(false)
     expect(books.first.age).to eq(12)
     expect(books.first.summary).to eq('In this lovely ')
+  end
+
+  it "applies a schema to an XML document" do
+    books = Eatr::Xml::Document.new(schema).parse(File.read(document))
+    expect(books.count).to eq(1)
   end
 
   describe "parsing one document to multiple objects" do
