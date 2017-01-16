@@ -66,7 +66,7 @@ module Eatr
 
     def to_struct
       @struct_klass ||= begin
-                          Object.const_get("Struct::#{constant_name}")
+                          Object.const_get("Eatr::Struct::#{constant_name}")
                         rescue NameError
                           Struct.new(constant_name, *field_names)
                         end
