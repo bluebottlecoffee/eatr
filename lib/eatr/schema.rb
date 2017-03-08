@@ -11,7 +11,6 @@ module Eatr
         xpath
         csv_header
         strptime
-        value
         max_length
         length
         belongs_to_one
@@ -36,6 +35,11 @@ module Eatr
 
       def children
         Array[*@field_attributes['children']].map { |f| Field.new(f) }
+      end
+
+      def value
+        @field_attributes['value'] ||
+          @field_attributes['default']
       end
     end
 

@@ -16,6 +16,6 @@ describe Eatr::Csv::Document do
     expect(books[1].title).to eq('The Matrix')
     expect(books[1].rating).to eq(73)
     expect(books[1].release_year).to eq(1999)
-    expect(books[1].release_date).to eq(Date.new(1999, 3, 31))
+    expect(books[1].release_date).to eq(Date.new(2017, 1, 1))
   end
 end

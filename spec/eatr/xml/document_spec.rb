@@ -40,7 +40,9 @@ describe Eatr::Xml::Document do
       books = Eatr::Xml::Document.new(schema).parse(document)
       expect(books.count).to eq(2)
       expect(books[0].title).to eq('Handy Book 1')
+      expect(books[0].author).to eq('GR')
       expect(books[1].title).to eq('Handy Book 2')
+      expect(books[1].author).to eq('Bob')
     end
   end
 

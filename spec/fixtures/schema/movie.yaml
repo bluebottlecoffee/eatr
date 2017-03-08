@@ -14,6 +14,7 @@ fields:
     csv_header: release_date
     type: timestamp
     strptime: '%m/%d/%Y'
+    default: '1/1/2017'
   - name: lead_actor
     required: false
   - name: is_good

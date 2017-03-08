@@ -36,10 +36,10 @@ module Eatr
       private
 
       def value_at(row, field)
-        if field.value
-          field.value
-        elsif text = row[field.csv_header]
+        if text = row[field.csv_header]
           parse_value(field, text)
+        elsif field.value
+          parse_value(field, field.value)
         elsif field.required?
           raise ValueNotFound, "Unable to find '#{field.name}' with header '#{field.csv_header}'"
         end

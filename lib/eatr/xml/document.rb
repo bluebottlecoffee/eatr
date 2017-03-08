@@ -78,14 +78,16 @@ module Eatr
       end
 
       def value_at(doc, field)
-        if field.value
-          field.value
-        elsif field.xpath
+        if field.xpath
           if node = doc.at_xpath(field.xpath, @namespaces)
             parse_value(field, node.content)
+          elsif field.value
+            parse_value(field, field.value)
           elsif field.required?
             raise NodeNotFound, "Unable to find '#{field.name}' using xpath '#{field.xpath}'"
           end
+        elsif field.value
+          field.value
         end
       end
     end

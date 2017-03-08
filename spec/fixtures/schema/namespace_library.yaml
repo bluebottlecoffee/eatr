@@ -6,3 +6,7 @@ fields:
     - name: title
       xpath: ./title
       type: string
+    - name: author
+      xpath: ./author
+      type: string
+      default: 'Bob'
