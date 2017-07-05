@@ -6,8 +6,10 @@ module Eatr
       end
 
       def schema(starting_point)
-        doc = Nokogiri::XML(File.open(@xml_path)) do |config|
-          config.strict.nonet
+        doc = File.open(@xml_path) do |f|
+          Nokogiri::XML(f) do |config|
+            config.strict.nonet
+          end
         end
 
         doc.remove_namespaces!

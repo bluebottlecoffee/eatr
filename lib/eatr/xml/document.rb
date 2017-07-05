@@ -21,15 +21,16 @@ module Eatr
       def parse(xml_document_path)
         @namespaces = {}
 
-        if File.exists?(xml_document_path)
-          file = File.open(xml_document_path)
-        else
-          file = StringIO.new(xml_document_path)
+        parse_document = ->(f) do
+          Nokogiri::XML(f) { |config| config.strict.nonet }
         end
 
-        doc = Nokogiri::XML(file) do |config|
-          config.strict.nonet
+        if File.exists?(xml_document_path)
+          doc = File.open(xml_document_path, &parse_document)
+        else
+          doc = StringIO.open(xml_document_path, &parse_document)
         end
+
 
         if @schema.remove_namespaces?
           doc.remove_namespaces!
